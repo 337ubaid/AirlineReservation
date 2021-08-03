@@ -16,6 +16,24 @@ public class Main {
                 "pilih menu: ");
 
         Scanner inputmenu = new Scanner(System.in);
-        int pilih = inputmenu.nextInt();
+        String pilih = inputmenu.next();
+
+        switch (pilih){
+            case "1":
+                System.out.println("Booking pesawat");
+                break;
+            case "2":
+                System.out.println("Tiket Tersedia");
+                break;
+            case "3":
+                System.out.println("Cancel Tiket");
+                break;
+            case "4":
+                System.out.println("Ganti Jadwal");
+                break;
+            default:
+                System.err.println("mohon pilih antara 1-4");
+
+        }
     }
 }
