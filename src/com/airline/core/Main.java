@@ -39,3 +39,16 @@ public class Main {
         }
     }
 }
+
+class User{
+    private int saldo;
+
+    User(int saldo){
+        this.saldo=saldo;
+    }
+
+    int getSaldo(){
+        return saldo;
+    }
+
+}
