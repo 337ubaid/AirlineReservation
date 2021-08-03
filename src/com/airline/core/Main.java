@@ -20,7 +20,9 @@ public class Main {
 
         switch (pilih){
             case "1":
-                System.out.println("Booking pesawat");
+                System.out.println("Booking pesawat\n");
+                bookingPesawat book = new bookingPesawat();
+                book.viewBookingPesawat();
                 break;
             case "2":
                 System.out.println("Tiket Tersedia");
