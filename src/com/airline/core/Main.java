@@ -5,7 +5,10 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
+        mainMenu();
+    }
 
+    static void mainMenu() throws IOException {
         System.out.println("AIRLINE RESERVATION");
         System.out.println("===================");
 
@@ -22,19 +25,31 @@ public class Main {
 
         switch (pilih) {
             case "1" -> {
-                System.out.println("Booking pesawat\n");
+                System.out.println("\nBooking pesawat");
                 bookingPesawat book = new bookingPesawat();
                 book.viewBookingPesawat();
             }
             case "2" -> {
                 System.out.println("Tiket Tersedia");
                 ListTicket listTicket = new ListTicket();
-                listTicket.Tersedia();
+                listTicket.ListTicketTersedia();
             }
             case "3" -> System.out.println("Cancel Tiket");
             case "4" -> System.out.println("Ganti Jadwal");
             default -> System.err.println("mohon pilih antara 1-4");
         }
     }
+
+    static void yesOrNo() throws IOException {
+        System.out.print("Kembali ke main menu? (y/n) ");
+        Scanner in = new Scanner(System.in);
+        String input = in.nextLine();
+        if(input == "y"){
+            mainMenu();
+        }else{
+            System.out.println("Terimakasih telah menggunakan layanan kami");
+        }
+    }
+
 }
 

@@ -6,7 +6,7 @@ import java.util.StringTokenizer;
 
 public class ListTicket {
 
-    public static void ListTicketTersedia() throws IOException {
+    public void ListTicketTersedia() throws IOException {
 
         // Kota tujuan, maskapai, Kelas penerbangan, harga, tanggal pergi
 

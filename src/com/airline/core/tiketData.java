@@ -19,12 +19,8 @@ public class tiketData {
     }
 
     // Menghapus line database yang dipilih agar terupdate
-    void updateDatabase() {
-
-    }
-
-    void displayList() {
-
+    void updateDatabase() throws IOException {
+        ListTicket.HapusListTicket(this.pilihan);
     }
 
 }

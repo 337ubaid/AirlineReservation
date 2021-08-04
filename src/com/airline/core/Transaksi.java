@@ -22,12 +22,11 @@ public class Transaksi {
 
     // Cek jika uangnya cukup atau tidak
     boolean isBokek(int saldo, int hargaTiket){
-        if(saldo>=hargaTiket){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return saldo < hargaTiket;
+    }
+
+    boolean getIsBokek(){
+        return isBokek(ubed.getSaldo(),convertDataToIntHarga(this.dataTiket));
     }
 
     // Perhitungan saldo
