@@ -20,40 +20,21 @@ public class Main {
         Scanner inputmenu = new Scanner(System.in);
         String pilih = inputmenu.next();
 
-        switch (pilih){
-            case "1":
+        switch (pilih) {
+            case "1" -> {
                 System.out.println("Booking pesawat\n");
                 bookingPesawat book = new bookingPesawat();
                 book.viewBookingPesawat();
-                break;
-            case "2":
+            }
+            case "2" -> {
                 System.out.println("Tiket Tersedia");
                 ListTicket listTicket = new ListTicket();
-                listTicket.ListTicketTersedia();
-                listTicket.HapusListTicket(5); // Unccommand untuk mencoba
-                listTicket.TambahListTicket("Malaysia,Citilink,economy,2000000,07/08/21");
-                break;
-            case "3":
-                System.out.println("Cancel Tiket");
-                break;
-            case "4":
-                System.out.println("Ganti Jadwal");
-                break;
-            default:
-                System.err.println("mohon pilih antara 1-4");
+                listTicket.Tersedia();
+            }
+            case "3" -> System.out.println("Cancel Tiket");
+            case "4" -> System.out.println("Ganti Jadwal");
+            default -> System.err.println("mohon pilih antara 1-4");
         }
     }
 }
 
-class User{
-    private int saldo;
-
-    User(int saldo){
-        this.saldo=saldo;
-    }
-
-    int getSaldo(){
-        return saldo;
-    }
-
-}
