@@ -34,6 +34,7 @@ public class Transaksi {
     int hitungSaldo(){
         if(!isBokek(ubed.getSaldo(),convertDataToIntHarga(this.dataTiket))){
             this.saldoFinal = ubed.getSaldo()-convertDataToIntHarga(this.dataTiket);
+            ubed.setSaldo(this.saldoFinal);
             return this.saldoFinal;
         }else{
             return -1;

@@ -1,6 +1,6 @@
 package com.airline.core;
 
-class User {
+public class User {
     private int saldo;
 
     User(int saldo) {
