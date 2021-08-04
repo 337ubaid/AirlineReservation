@@ -1,43 +1,30 @@
 package com.airline.core;
 
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Scanner;
 
 class tiketData{
     int pilihan;
-    String[] arrList;
     String tiket;
 
-    tiketData(int pilihan, String[] arrList){
+    tiketData(int pilihan) throws FileNotFoundException {
         this.pilihan = pilihan;
-        this.arrList = arrList;
     }
 
-    String getTiketData(){
-        this.tiket = arrList[pilihan-1];
+    String getTiketData() throws IOException {
+        this.tiket = Files.readAllLines(Paths.get("listTicket.txt")).get(pilihan-1);
         return this.tiket;
     }
 
-    // Membuat array baru setelah melakukan transaksi
-    String[] listBaru(String[] arrList){
-        String[] newArr = new String[arrList.length-1];
-        int k = 0;
-        for(int i = 0;i< arrList.length;i++){
-            if(i==pilihan-1) continue;
-            else{
-                newArr[k] = arrList[i];
-                k++;
-            }
-        }
+    // Menghapus line database yang dipilih agar terupdate
+    void updateDatabase(){
 
-        return newArr;
     }
 
     void displayList(){
-        int i = 1;
-        for(String list: listBaru(arrList)){
-            System.out.println("\n"+i+". " + list);
-            i++;
-        }
+
     }
 
 }
@@ -58,11 +45,8 @@ class Transaksi{
 
     // Nanti bakal read file di split2
     int convertDataToIntHarga(String dataTiket){
-        if(dataTiket == "Garuda"){
-            hargaTiket = 400000;
-        }else{
-            return 0;
-        }
+        String[] hargaString = dataTiket.split(",");
+        hargaTiket = Integer.parseInt(hargaString[3]);
         return hargaTiket;
     }
 
@@ -76,13 +60,12 @@ class Transaksi{
 }
 
 public class bookingPesawat {
-    void viewBookingPesawat(){
+    void viewBookingPesawat() throws IOException {
         // Memunculkan list tiket tersedia
         int i = 1;
-        for(String list: dummyList()){
-            System.out.println(i+". " + list);
-            i++;
-        }
+        ListTicket listTicket = new ListTicket();
+        listTicket.Tersedia();
+
         System.out.print("Pilih tiket: ");
 
         // Scanner pilihan
@@ -90,17 +73,12 @@ public class bookingPesawat {
         int tiketPilihan = inputTiket.nextInt();
 
         // Proses pengambilan data
-        tiketData beliTiket = new tiketData(tiketPilihan, dummyList());
-        beliTiket.displayList();
+        tiketData beliTiket = new tiketData(tiketPilihan);
 
         // proses transaksi
         Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
         transaksi.displaySaldo();
     }
 
-    static String[] dummyList(){
-        String[] tikets = {"Garuda", "Air Asia", "Batik Air"};
 
-        return tikets;
-    }
 }
