@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-class tiketData {
+public class tiketData {
     int pilihan;
     String tiket;
 

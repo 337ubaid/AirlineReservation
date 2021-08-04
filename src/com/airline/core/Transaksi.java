@@ -1,7 +1,7 @@
 package com.airline.core;
 
 // Sistem transaksi
-class Transaksi {
+public class Transaksi {
     int saldoFinal;
     int hargaTiket;
     String dataTiket;
