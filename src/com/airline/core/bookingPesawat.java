@@ -16,12 +16,18 @@ public class bookingPesawat {
         Scanner inputTiket = new Scanner(System.in);
         int tiketPilihan = inputTiket.nextInt();
 
-        // Proses pengambilan data
-        tiketData beliTiket = new tiketData(tiketPilihan);
+        try{
+            // Proses pengambilan data
+            tiketData beliTiket = new tiketData(tiketPilihan);
 
-        // proses transaksi
-        Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
-        transaksi.displaySaldo();
+            // proses transaksi
+            Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
+            transaksi.displaySaldo();
+        } catch (Exception e){
+            System.out.println("Mohon pilih angka yang valid");
+        }
+
+
     }
 
 
