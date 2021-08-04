@@ -2,3 +2,4 @@ Surabaya,Garuda,economy,300000,04/08/21
 Jakarta,Garuda,business,1500000,05/08/21
 Yogyakarta,Batik Air,economy,200000,04/08/21
 Jakarta,Air Asia,first class,2000000,06/08/21
+Malaysia,Citilink,economy,2000000,07/08/21

@@ -29,8 +29,9 @@ public class Main {
             case "2":
                 System.out.println("Tiket Tersedia");
                 ListTicket listTicket = new ListTicket();
-                listTicket.Tersedia();
-
+                listTicket.ListTicketTersedia();
+                listTicket.HapusListTicket(5); // Unccommand untuk mencoba
+                listTicket.TambahListTicket("Malaysia,Citilink,economy,2000000,07/08/21");
                 break;
             case "3":
                 System.out.println("Cancel Tiket");
