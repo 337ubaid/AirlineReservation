@@ -8,7 +8,7 @@ public class bookingPesawat {
         // Memunculkan list tiket tersedia
         int i = 1;
         ListTicket listTicket = new ListTicket();
-        listTicket.Tersedia();
+        listTicket.ListTicketTersedia();
 
         System.out.print("Pilih tiket: ");
 
@@ -23,11 +23,20 @@ public class bookingPesawat {
             // proses transaksi
             Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
             transaksi.displaySaldo();
+
+            // Penambahan data ke database user
+
+            // Penghapusan data dari database tiket
+            if(!transaksi.getIsBokek()){
+                beliTiket.updateDatabase();
+            }
+
+
         } catch (Exception e){
             System.out.println("Mohon pilih angka yang valid");
         }
-
-
+        // Kembali ke main menu
+        Main.yesOrNo();
     }
 
 
