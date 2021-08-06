@@ -44,7 +44,7 @@ public class Main {
         System.out.print("Kembali ke main menu? (y/n) ");
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
-        if(input == "y"){
+        if(input.equals("y")){
             mainMenu();
         }else{
             System.out.println("Terimakasih telah menggunakan layanan kami");
