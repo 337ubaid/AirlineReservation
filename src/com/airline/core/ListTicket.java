@@ -1,7 +1,6 @@
 package com.airline.core;
 
 import java.io.*;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class ListTicket {
@@ -21,8 +20,8 @@ public class ListTicket {
         String data = bufferedInput.readLine();
         int nomorData = 0;
 
-        System.out.println("\n| No " + "|\tTujuan          " + "|\tMaskapai   " + "|\tKelas Penerbangan  " + "|\tHarga    " + "|\tTanggal");
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("\n| No " + "|\tTujuan          " + "|\tMaskapai   " + "|\tKelas Penerbangan  " + "|\t   Harga      " + "|\tTanggal");
+        System.out.println("--------------------------------------------------------------------------------------------");
 
         while (data != null){
             nomorData++;
@@ -32,13 +31,14 @@ public class ListTicket {
             System.out.printf("|\t%-15s ", st.nextToken());
             System.out.printf("|\t%-10s ", st.nextToken());
             System.out.printf("|\t%-18s ", st.nextToken());
-            System.out.printf("|\t%8s ", st.nextToken());
+            int harga = Integer.parseInt(st.nextToken());
+            System.out.printf("|\t%,13d ", harga);
             System.out.printf("|\t%-9s ", st.nextToken());
             System.out.println();
 
             data = bufferedInput.readLine();
         }
-        System.out.println("----------------------------------------------------------------------------------------");
+        System.out.println("--------------------------------------------------------------------------------------------");
 
         fileInput.close();
         bufferedInput.close();
