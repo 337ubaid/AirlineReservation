@@ -4,9 +4,8 @@ import java.io.*;
 import java.util.Scanner;
 
 public class bookingPesawat {
-    void viewBookingPesawat() throws IOException {
+    void viewBookingPesawat(User user) throws IOException {
         // Memunculkan list tiket tersedia
-        int i = 1;
         ListTicket listTicket = new ListTicket();
         listTicket.ListTicketTersedia();
 
@@ -22,14 +21,16 @@ public class bookingPesawat {
 
             // proses transaksi
             Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
-            transaksi.displaySaldo();
-
-            // Penambahan data ke database user
+            transaksi.hitungSaldo(user);
+            // Penambahan tiket ke database user
+            ListUser.isiTiket(tiketPilihan, user.userPilihan, transaksi);
 
             // Penghapusan data dari database tiket
-            if(!transaksi.getIsBokek()){
-                beliTiket.updateDatabase();
-            }
+            beliTiket.updateDatabase();
+
+            // list user sementara
+            ListUser.viewListUser();
+
 
 
         } catch (Exception e){
