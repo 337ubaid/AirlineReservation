@@ -4,8 +4,11 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
+    public static User userData = new User();
     public static void main(String[] args) throws IOException {
+        userData.viewListUser();
         mainMenu();
+
     }
 
     static void mainMenu() throws IOException {
@@ -27,7 +30,7 @@ public class Main {
             case "1" -> {
                 System.out.println("\nBooking pesawat");
                 bookingPesawat book = new bookingPesawat();
-                book.viewBookingPesawat();
+                book.viewBookingPesawat(userData);
             }
             case "2" -> {
                 System.out.println("Tiket Tersedia");

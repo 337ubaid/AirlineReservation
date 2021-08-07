@@ -41,24 +41,16 @@ public class ListUser {
         bufferedInput.close();
     }
 
-    public static void isiTiket(int barisPilihanUser) throws IOException{
+    public static void isiTiket(int tiketPilihan, int userPilihan, Transaksi transaksi) throws IOException{
         // Membaca database listUser
         File listUser = new File("listUser.txt");
         FileReader fileUser = new FileReader(listUser);
         BufferedReader bufferedUser = new BufferedReader(fileUser);
 
         // Mengambil data tiket pada baris pilihan user
-        String dataTiket = Files.readAllLines(Paths.get("listTicket.txt")).get(barisPilihanUser - 1);
+        String dataTiket = Files.readAllLines(Paths.get("listTicket.txt")).get(tiketPilihan - 1);
 
-        // Mengambil input akun pilihan
-        Scanner inputNamaUser = new Scanner(System.in);
-
-        viewListUser();
-
-        System.out.print("\nPILIH AKUN ANDA: ");
-        int inputPilihan = inputNamaUser.nextInt();
-
-        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(inputPilihan - 1);
+        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(userPilihan - 1);
 
         // Mengisi tiket kosong
         File tempLU = new File("tempLU.txt");
@@ -68,6 +60,7 @@ public class ListUser {
         // Mengisi tiket kosong
 
         String[] tiketKosong = dataUser.split("_");
+        tiketKosong[1] = Integer.toString(transaksi.saldoFinal);
         tiketKosong[2] = dataTiket;
 
         StringBuilder builder = new StringBuilder();
@@ -88,7 +81,7 @@ public class ListUser {
 
         while (dataUserSemua != null){
             numBarisUser++;
-            if (numBarisUser == inputPilihan){
+            if (numBarisUser == userPilihan){
                 bufferedTempLU.write(dataTiketFinal);
             }else{
                 bufferedTempLU.write(dataUserSemua);

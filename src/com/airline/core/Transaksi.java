@@ -1,22 +1,23 @@
 package com.airline.core;
 
+import java.io.IOException;
+
 // Sistem transaksi
 public class Transaksi {
     int saldoFinal;
     int hargaTiket;
     String dataTiket;
 
+
     Transaksi(String dataTiket) {
         this.dataTiket = dataTiket;
     }
 
-    // user ubed + assign saldo
-    User ubed = new User(1000000);
 
     // Nanti bakal read file di split2
-    int convertDataToIntHarga(String dataTiket) {
+    int convertDataToIntHarga(String dataTiket, int index) {
         String[] hargaString = dataTiket.split(",");
-        hargaTiket = Integer.parseInt(hargaString[3]);
+        hargaTiket = Integer.parseInt(hargaString[index]);
         return hargaTiket;
     }
 
@@ -25,28 +26,18 @@ public class Transaksi {
         return saldo < hargaTiket;
     }
 
-    boolean getIsBokek(){
-        return isBokek(ubed.getSaldo(),convertDataToIntHarga(this.dataTiket));
-    }
 
-    // Perhitungan saldo
-    int hitungSaldo(){
-        if(!isBokek(ubed.getSaldo(),convertDataToIntHarga(this.dataTiket))){
-            this.saldoFinal = ubed.getSaldo()-convertDataToIntHarga(this.dataTiket);
-            ubed.setSaldo(this.saldoFinal);
+    // Perhitungan saldo dikurangi harga tiket
+    int hitungSaldo(User userData) throws IOException {
+
+        if(!isBokek(userData.getSaldo(),convertDataToIntHarga(this.dataTiket,3))){
+            this.saldoFinal = userData.getSaldo()-convertDataToIntHarga(this.dataTiket,3);
+//            user.setSaldo(this.saldoFinal);
             return this.saldoFinal;
         }else{
             return -1;
         }
     }
 
-    void displaySaldo() {
-        if (hitungSaldo() != -1){
-            System.out.println("Saldo Anda\t: " + ubed.getSaldo());
-            System.out.println("Harga tiket\t: "+ convertDataToIntHarga(this.dataTiket));
-            System.out.println("Saldo akhir\t: " + saldoFinal);
-        }else{
-            System.out.println("SALDO ANDA TIDAK MENCUKUPI");
-        }
-    }
+
 }
