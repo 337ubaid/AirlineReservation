@@ -1,9 +1,9 @@
 package com.airline.core;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class ListUser {
@@ -20,7 +20,7 @@ public class ListUser {
         int nomorData = 0;
 
         System.out.println("\n| No " + "|\tNama         " + "|\tSaldo      " + "|\tTiket  " );
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------");
 
         while (data != null) {
             nomorData++;
@@ -35,37 +35,146 @@ public class ListUser {
 
             data = bufferedInput.readLine();
         }
-        System.out.println("---------------------------------------------------------------------------------");
+        System.out.println("-------------------------------------------------------------------------------------");
 
         fileInput.close();
         bufferedInput.close();
     }
 
-    public static void isiTiket(int barisPilihanUser, String namaUser) throws IOException{
-        // Membaca database listTicket
-        FileReader fileTicket = new FileReader("listTicket.txt");
-        BufferedReader bufferedTicket = new BufferedReader(fileTicket);
-
+    public static void isiTiket(int barisPilihanUser) throws IOException{
         // Membaca database listUser
         File listUser = new File("listUser.txt");
         FileReader fileUser = new FileReader(listUser);
         BufferedReader bufferedUser = new BufferedReader(fileUser);
 
         // Mengambil data tiket pada baris pilihan user
-        String data = bufferedTicket.readLine();
-        String tiketPilihan = "kosong";
+        String dataTiket = Files.readAllLines(Paths.get("listTicket.txt")).get(barisPilihanUser - 1);
 
-        int numBaris = 0;
+        // Mengambil input akun pilihan
+        Scanner inputNamaUser = new Scanner(System.in);
 
-        while (data != null){
-            numBaris++;
-            if (numBaris == barisPilihanUser){
-                tiketPilihan = data;
-                break;
+        viewListUser();
+
+        System.out.print("\nPILIH AKUN ANDA: ");
+        int inputPilihan = inputNamaUser.nextInt();
+
+        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(inputPilihan - 1);
+
+        // Mengisi tiket kosong
+        File tempLU = new File("tempLU.txt");
+        FileWriter fileTempLU = new FileWriter(tempLU);
+        BufferedWriter bufferedTempLU = new BufferedWriter(fileTempLU);
+
+        // Mengisi tiket kosong
+
+        String[] tiketKosong = dataUser.split("_");
+        tiketKosong[2] = dataTiket;
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < tiketKosong.length; i++){
+            if (i == tiketKosong.length - 1){
+                builder.append(tiketKosong[i]);
+            }else {
+                builder.append(tiketKosong[i]).append("_");
             }
-            data = bufferedTicket.readLine();
         }
 
-        System.out.println(tiketPilihan);
+        String dataTiketFinal = builder.toString();
+
+        // Mengkopi ke fiel tempLU
+        int numBarisUser = 0;
+        String dataUserSemua = bufferedUser.readLine();
+
+        while (dataUserSemua != null){
+            numBarisUser++;
+            if (numBarisUser == inputPilihan){
+                bufferedTempLU.write(dataTiketFinal);
+            }else{
+                bufferedTempLU.write(dataUserSemua);
+            }
+            bufferedTempLU.newLine();
+            dataUserSemua = bufferedUser.readLine();
+        }
+
+        bufferedTempLU.flush();
+
+        fileUser.close();
+        bufferedUser.close();
+        fileTempLU.close();
+        bufferedTempLU.close();
+
+        System.gc();
+
+        listUser.delete();
+
+        tempLU.renameTo(listUser);
+    }
+
+    public static void hapusIsiTiket () throws IOException{
+        // Membaca database listUser
+        File listUser = new File("listUser.txt");
+        FileReader fileUser = new FileReader(listUser);
+        BufferedReader bufferedUser = new BufferedReader(fileUser);
+
+        // Mengambil input akun pilihan
+        Scanner inputNamaUser = new Scanner(System.in);
+
+        viewListUser();
+
+        System.out.print("\nPILIH AKUN ANDA: ");
+        int inputPilihan = inputNamaUser.nextInt();
+
+        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(inputPilihan - 1);
+
+        // Menghapus isi tiket menjadi kosong
+        File tempLU = new File("tempLU.txt");
+        FileWriter fileTempLU = new FileWriter(tempLU);
+        BufferedWriter bufferedTempLU = new BufferedWriter(fileTempLU);
+
+        // Mengubah isi tiket
+
+        String[] tiketIsi = dataUser.split("_");
+        tiketIsi[2] = "kosong";
+
+        StringBuilder builder = new StringBuilder();
+
+        for (int i = 0; i < tiketIsi.length; i++){
+            if (i == tiketIsi.length - 1){
+                builder.append(tiketIsi[i]);
+            }else {
+                builder.append(tiketIsi[i]).append("_");
+            }
+        }
+
+        String dataTiketFinal = builder.toString();
+
+        // Mengkopi ke fiel tempLU
+        int numBarisUser = 0;
+        String dataUserSemua = bufferedUser.readLine();
+
+        while (dataUserSemua != null){
+            numBarisUser++;
+            if (numBarisUser == inputPilihan){
+                bufferedTempLU.write(dataTiketFinal);
+            }else{
+                bufferedTempLU.write(dataUserSemua);
+            }
+            bufferedTempLU.newLine();
+            dataUserSemua = bufferedUser.readLine();
+        }
+
+        bufferedTempLU.flush();
+
+        fileUser.close();
+        bufferedUser.close();
+        fileTempLU.close();
+        bufferedTempLU.close();
+
+        System.gc();
+
+        listUser.delete();
+
+        tempLU.renameTo(listUser);
     }
 }
