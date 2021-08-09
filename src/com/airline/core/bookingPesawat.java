@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.Scanner;
 
 public class bookingPesawat {
-    void viewBookingPesawat(User user) throws IOException {
+    void viewBookingPesawat(User userData) throws IOException {
         // Memunculkan list tiket tersedia
         ListTicket listTicket = new ListTicket();
         listTicket.ListTicketTersedia();
@@ -21,9 +21,9 @@ public class bookingPesawat {
 
             // proses transaksi
             Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
-            transaksi.hitungSaldo(user);
+            transaksi.hitungSaldo(userData);
             // Penambahan tiket ke database user
-            ListUser.isiTiket(tiketPilihan, user.userPilihan, transaksi);
+            ListUser.isiTiket(tiketPilihan, userData.userPilihan, transaksi);
 
             // Penghapusan data dari database tiket
             beliTiket.updateDatabase();
@@ -31,13 +31,13 @@ public class bookingPesawat {
             // list user sementara
             ListUser.viewListUser();
 
-
-
         } catch (Exception e){
             System.out.println("Mohon pilih angka yang valid");
         }
         // Kembali ke main menu
         Main.yesOrNo();
+
+
     }
 
 
