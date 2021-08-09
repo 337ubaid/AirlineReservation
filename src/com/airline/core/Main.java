@@ -8,7 +8,6 @@ public class Main {
     public static void main(String[] args) throws IOException {
         userData.viewListUser();
         mainMenu();
-
     }
 
     static void mainMenu() throws IOException {
@@ -37,7 +36,12 @@ public class Main {
                 ListTicket listTicket = new ListTicket();
                 listTicket.ListTicketTersedia();
             }
-            case "3" -> System.out.println("Cancel Tiket");
+            case "3" -> {
+                System.out.println("Cancel Tiket");
+                Cancel cancel = new Cancel();
+                cancel.viewCancel(userData);
+
+            }
             case "4" -> System.out.println("Ganti Jadwal");
             default -> System.err.println("mohon pilih antara 1-4");
         }

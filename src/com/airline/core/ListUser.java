@@ -104,21 +104,15 @@ public class ListUser {
         tempLU.renameTo(listUser);
     }
 
-    public static void hapusIsiTiket () throws IOException{
+    public static void hapusIsiTiket (int userPilihan, String hargaTiket) throws IOException{
         // Membaca database listUser
         File listUser = new File("listUser.txt");
         FileReader fileUser = new FileReader(listUser);
         BufferedReader bufferedUser = new BufferedReader(fileUser);
 
-        // Mengambil input akun pilihan
-        Scanner inputNamaUser = new Scanner(System.in);
 
-        viewListUser();
-
-        System.out.print("\nPILIH AKUN ANDA: ");
-        int inputPilihan = inputNamaUser.nextInt();
-
-        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(inputPilihan - 1);
+        String dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(userPilihan - 1);
+//        String dataTiket = Files.readAllLines(Paths.get("listTicket.txt")).get(tiketPilihan - 1); // Misal ga butuh, delete ae
 
         // Menghapus isi tiket menjadi kosong
         File tempLU = new File("tempLU.txt");
@@ -128,6 +122,7 @@ public class ListUser {
         // Mengubah isi tiket
 
         String[] tiketIsi = dataUser.split("_");
+        tiketIsi[1] = hargaTiket;
         tiketIsi[2] = "kosong";
 
         StringBuilder builder = new StringBuilder();
@@ -148,7 +143,7 @@ public class ListUser {
 
         while (dataUserSemua != null){
             numBarisUser++;
-            if (numBarisUser == inputPilihan){
+            if (numBarisUser == userPilihan){
                 bufferedTempLU.write(dataTiketFinal);
             }else{
                 bufferedTempLU.write(dataUserSemua);
