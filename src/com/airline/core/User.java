@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 public class User {
     String dataUser;
+    String nama;
     int userPilihan;
     int saldo;
 
@@ -34,6 +35,15 @@ public class User {
         this.saldo = Integer.parseInt(saldoString[1]);
 
         return this.saldo;
+    }
+
+
+    //buat ambil nama user
+    public String getnamaUser() throws IOException {
+        String[] namaString = dataUser().split("_");
+        this.nama = String.format(namaString[0]);
+
+        return this.nama;
     }
 
 

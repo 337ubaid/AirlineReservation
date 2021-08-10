@@ -11,7 +11,9 @@ public class Main {
     }
 
     static void mainMenu() throws IOException {
-        System.out.println("AIRLINE RESERVATION");
+        System.out.println("\nhai " + userData.getnamaUser() +", Saldo anda " + userData.getSaldo());
+
+        System.out.println("\nAIRLINE RESERVATION");
         System.out.println("===================");
 
         System.out.print("""
@@ -24,6 +26,7 @@ public class Main {
 
         Scanner inputmenu = new Scanner(System.in);
         String pilih = inputmenu.next();
+
 
         switch (pilih) {
             case "1" -> {
@@ -43,7 +46,7 @@ public class Main {
 
             }
             case "4" -> System.out.println("Ganti Jadwal");
-            default -> System.err.println("mohon pilih antara 1-4");
+            default -> System.err.println("input tidak valid\nmohon pilih antara 1-4");
         }
     }
 
@@ -52,9 +55,19 @@ public class Main {
         Scanner in = new Scanner(System.in);
         String input = in.nextLine();
         if(input.equals("y")){
+            //Cls();
             mainMenu();
+
         }else{
             System.out.println("Terimakasih telah menggunakan layanan kami");
+        }
+    }
+
+    private static void Cls(){
+        try {
+            new ProcessBuilder("cmd","c","cls").inheritIO().start().waitFor();
+        }catch (Exception ex){
+            System.err.println("gabisa cls");
         }
     }
 
