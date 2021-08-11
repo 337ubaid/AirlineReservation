@@ -42,6 +42,7 @@ public class ListTicket {
 
         fileInput.close();
         bufferedInput.close();
+
     }
 
     public static void HapusListTicket (int pilihanUser) throws IOException{

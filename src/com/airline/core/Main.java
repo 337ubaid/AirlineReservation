@@ -11,7 +11,8 @@ public class Main {
     }
 
     static void mainMenu() throws IOException {
-        System.out.println("\nhai " + userData.getnamaUser() +", Saldo anda " + userData.getSaldo());
+        System.out.println("\nNama\t: " + userData.getnamaUser() +", Saldo anda " + userData.getSaldo());
+
 
         System.out.println("\nAIRLINE RESERVATION");
         System.out.println("===================");
@@ -20,8 +21,7 @@ public class Main {
                 1. Booking pesawat
                 2. Cek Tiket Tersedia
                 3. Cancel Tiket
-                4. Ganti Jadwal
-
+                
                 pilih menu:\s""");
 
         Scanner inputmenu = new Scanner(System.in);
@@ -38,14 +38,14 @@ public class Main {
                 System.out.println("Tiket Tersedia");
                 ListTicket listTicket = new ListTicket();
                 listTicket.ListTicketTersedia();
+                Main.yesOrNo();
             }
             case "3" -> {
-                System.out.println("Cancel Tiket");
+                System.out.println("Cancel Tiket\n");
                 Cancel cancel = new Cancel();
                 cancel.viewCancel(userData);
 
             }
-            case "4" -> System.out.println("Ganti Jadwal");
             default -> System.err.println("input tidak valid\nmohon pilih antara 1-4");
         }
     }

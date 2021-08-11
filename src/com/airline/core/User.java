@@ -20,6 +20,7 @@ public class User {
         // Pilihan user yang mana
         Scanner scanner = new Scanner(System.in);
         this.userPilihan = scanner.nextInt();
+
     }
 
     // Mengambil data user

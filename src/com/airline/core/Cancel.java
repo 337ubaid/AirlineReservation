@@ -7,28 +7,40 @@ import java.util.Scanner;
 
 public class Cancel {
     void viewCancel(User userData) throws IOException {
-        // Scanner
-        System.out.print("Apakah anda yakin ? (y/n) ");
-        Scanner scanner = new Scanner(System.in);
-        String inputCancel = scanner.nextLine();
-
-        if(inputCancel.equals("y")){
             try{
-                // Menghapus tiket di user
-                ListUser.hapusIsiTiket(userData.userPilihan, totalRefund(userData));
+                // Mengambil tiket user
+                String tiketData = userData.getUserTicket()[2];
 
-                // Menambahkan tiket ke database tiket @FAZA
+                // Cek kosong atau tak
+                if(tiketData.equals("kosong")){
+                    System.out.println("Anda tidak punya tiket :), silahkan anda beli terlebih dahulu");
+                    Main.yesOrNo();
+                }else{
+                    // Scanner
+                    System.out.print("Apakah anda yakin ? (y/n) ");
+                    Scanner scanner = new Scanner(System.in);
+                    String inputCancel = scanner.nextLine();
 
-                // Kembali ke main
-                Main.yesOrNo();
+                    if(inputCancel.equals("y")){
+
+                    // Menghapus tiket di user
+                    ListUser.hapusIsiTiket(userData.userPilihan, totalRefund(userData));
+
+                    // Menambahkan tiket ke database tiket @FAZA
+                    ListTicket.TambahListTicket(tiketData);
+
+                    // Kembali ke main
+                    Main.yesOrNo();
+                    }else{
+                        Main.yesOrNo();
+                    }
+                }
 
             }catch(Exception e){
                 Main.yesOrNo();
             }
-        }
-        else{
-            Main.yesOrNo();
-        }
+
+
 
     }
     // Mengambil informasi harga dari tiket
@@ -54,4 +66,7 @@ public class Cancel {
     String totalRefund(User userData) throws IOException {
         return Integer.toString(getTicketUserHarga(userData)+getSaldoUser(userData));
     }
+
+
+
 }
