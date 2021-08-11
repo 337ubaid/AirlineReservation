@@ -28,11 +28,15 @@ public class User {
         this.dataUser = Files.readAllLines(Paths.get("listUser.txt")).get(this.userPilihan - 1);
         return this.dataUser;
     }
+    public String[] getUserTicket() throws IOException {
+        String[] ticketUser = dataUser().split("_");
+
+        return ticketUser;
+    }
 
     // Mengambil info saldo user
     public int getSaldo() throws IOException {
-        String[] saldoString = dataUser().split("_");
-        this.saldo = Integer.parseInt(saldoString[1]);
+        this.saldo = Integer.parseInt(getUserTicket()[1]);
 
         return this.saldo;
     }
@@ -40,8 +44,7 @@ public class User {
 
     //buat ambil nama user
     public String getnamaUser() throws IOException {
-        String[] namaString = dataUser().split("_");
-        this.nama = String.format(namaString[0]);
+        this.nama = String.format(getUserTicket()[0]);
 
         return this.nama;
     }

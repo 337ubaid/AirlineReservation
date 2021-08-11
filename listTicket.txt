@@ -1,4 +1,3 @@
 Malaysia,Citilink,economy,2000000,07/08/21
 Yogyakarta,Batik Air,economy,200000,04/08/21
-Yogyakarta,Batik Air,economy,200000,04/08/21
 Jakarta,Air Asia,first class,2000000,06/08/21
