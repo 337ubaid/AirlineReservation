@@ -5,37 +5,45 @@ import java.util.Scanner;
 
 public class bookingPesawat {
     void viewBookingPesawat(User userData) throws IOException {
-        // Memunculkan list tiket tersedia
-        ListTicket listTicket = new ListTicket();
-        listTicket.ListTicketTersedia();
 
-        System.out.print("Pilih tiket: ");
+        if(!userData.getUserTicket()[2].equals("kosong")){
+            System.out.println("Anda Sudah punya tiket, jangan maruk");
+            Main.yesOrNo();
+        }else{
+            // Memunculkan list tiket tersedia
+            ListTicket listTicket = new ListTicket();
+            listTicket.ListTicketTersedia();
 
-        // Scanner pilihan
-        Scanner inputTiket = new Scanner(System.in);
-        int tiketPilihan = inputTiket.nextInt();
+            System.out.print("Pilih tiket: ");
 
-        try{
-            // Proses pengambilan data
-            tiketData beliTiket = new tiketData(tiketPilihan);
+            // Scanner pilihan
+            Scanner inputTiket = new Scanner(System.in);
+            int tiketPilihan = inputTiket.nextInt();
 
-            // proses transaksi
-            Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
-            transaksi.hitungSaldo(userData);
-            // Penambahan tiket ke database user
-            ListUser.isiTiket(tiketPilihan, userData.userPilihan, transaksi);
+            try{
+                // Proses pengambilan data
+                tiketData beliTiket = new tiketData(tiketPilihan);
 
-            // Penghapusan data dari database tiket
-            beliTiket.updateDatabase();
+                // proses transaksi
+                Transaksi transaksi = new Transaksi(beliTiket.getTiketData());
+                transaksi.hitungSaldo(userData);
+                // Penambahan tiket ke database user
+                ListUser.isiTiket(tiketPilihan, userData.userPilihan, transaksi);
 
-            // list user sementara
-            ListUser.viewListUser();
+                // Penghapusan data dari database tiket
+                beliTiket.updateDatabase();
 
-        } catch (Exception e){
-            System.out.println("Mohon pilih angka yang valid");
+                // list user sementara
+                ListUser.viewListUser();
+
+            } catch (Exception e){
+                System.out.println("Mohon pilih angka yang valid");
+            }
+            // Kembali ke main menu
+            Main.yesOrNo();
         }
-        // Kembali ke main menu
-        Main.yesOrNo();
+
+
 
 
     }
